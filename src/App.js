@@ -6,7 +6,7 @@ async function getSessionId(chatSessionId) {
     chat_session_id: chatSessionId,
   };
 
-  const response = await fetch("http://127.0.0.1:5000/session", {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/session`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -46,7 +46,7 @@ function App() {
 
     setMessages([...messages, userMessage, botMessage]);
     setInputText("");
-    const response = await fetch("http://127.0.0.1:5000/chat", {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/chat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
