@@ -19,7 +19,7 @@ async function getSessionId(chatSessionId) {
   return response_body.data.chat_session_id;
 }
 
-export default function Tutor() {
+export default function Tutor({ namespace }) {
   const [messages, setMessages] = useState([]);
   const [chatSessionId, setChatSessionId] = useState(null);
   const [inputText, setInputText] = useState("");
@@ -38,7 +38,7 @@ export default function Tutor() {
     const userMessage = { text: inputText, isBot: false };
     const body = {
       question: inputText,
-      namespace: "prod-science",
+      namespace,
       character: "steve_brule",
       chat_session_id: currentChatSessionId,
     };

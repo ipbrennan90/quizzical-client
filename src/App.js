@@ -1,26 +1,26 @@
 import "./App.css";
 import React from "react";
 import Tutor from "./pages/Tutor";
-
-async function getSessionId(chatSessionId) {
-  const body = {
-    chat_session_id: chatSessionId,
-  };
-
-  const response = await fetch(`${process.env.REACT_APP_API_URL}/session`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  });
-
-  const response_body = await response.json();
-  return response_body.data.chat_session_id;
-}
+import Configurator from "./pages/Configurator";
 
 function App() {
-  return <Tutor />;
+  const [teacherMode, setTeacherMode] = React.useState(true);
+  const [namespace, setNamespace] = React.useState("prod-science");
+
+  const closeTeacherMode = () => {
+    setTeacherMode(false);
+  };
+
+  if (teacherMode) {
+    return (
+      <Configurator
+        closeTeacherMode={closeTeacherMode}
+        setNamespace={setNamespace}
+      />
+    );
+  } else {
+    return <Tutor namespace={namespace} />;
+  }
 }
 
 export default App;
